@@ -15,3 +15,5 @@ RUN pip install influxdb pycurl
 
 # Remove unneed packages
 RUN apk del .build-dependencies
+
+WORKDIR /mnt
