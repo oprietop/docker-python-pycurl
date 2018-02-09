@@ -11,7 +11,7 @@ RUN apk add --no-cache --virtual .build-dependencies build-base curl-dev
 ENV PYCURL_SSL_LIBRARY=openssl
 
 # Pip stuff
-RUN pip install influxdb pycurl
+RUN pip install influxdb pycurl requests
 
 # Remove unneed packages
 RUN apk del .build-dependencies
