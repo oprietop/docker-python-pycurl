@@ -8,8 +8,9 @@ RUN apk add --no-cache libcurl
 ENV PYCURL_SSL_LIBRARY=openssl
 
 # Install packages only needed for building, install and clean on a single layer
-RUN apk add --no-cache --virtual .build-dependencies build-base curl-dev \
-    && pip install influxdb pycurl requests \
-    && apk del .build-dependencies
+RUN apk add --no-cache --virtual .build-deps build-base curl-dev \
+    && pip install influxdb pycurl requests pytz pycryptodomex scapy-python3 \
+    && apk del --no-cache --purge .build-deps \
+    && rm -rf /var/cache/apk/*
 
 WORKDIR /mnt
