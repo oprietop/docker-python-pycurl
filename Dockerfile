@@ -1,15 +1,13 @@
 FROM python:alpine
 MAINTAINER Oscar Prieto <oscarmpp@gmail.com>
 
-# Install packages
-RUN apk add --no-cache libcurl
-
-# Needed for pycurl
+# Needed for the pycurl compilation
 ENV PYCURL_SSL_LIBRARY=openssl
 
-# Install packages only needed for building, install and clean on a single layer
-RUN apk add --no-cache --virtual .build-deps build-base curl-dev \
-    && pip install influxdb pycurl requests pytz pycryptodomex scapy \
+# Single layer
+RUN apk add --no-cache libcurl \
+    && apk add -u --no-cache --virtual .build-deps build-base libffi-dev curl-dev \
+    && pip install influxdb pycurl asyncio aiohttp[speedups] requests pytz pycryptodomex scapy \
     && apk del --no-cache --purge .build-deps \
     && rm -rf /var/cache/apk/*
 

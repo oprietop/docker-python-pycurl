@@ -1,2 +1,2 @@
 # docker-python-pycurl
-Alpine latest with pycurl+influxdb and other related packages
+Python alpine latest with some commonly used pip packages that need to be compiled
